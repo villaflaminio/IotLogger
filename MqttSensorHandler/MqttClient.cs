@@ -30,6 +30,7 @@ namespace Iot.Mqtt.Sensor.Handler
 
                 MqttFactory mqttFactory = new MqttFactory();
                 _mqttClientThread = mqttFactory.CreateMqttClient();
+                StartConnectionAsync()
             }
             catch (Exception error)
             {

@@ -1,6 +1,7 @@
 using DataAccessEF;
 using DataAccessEF.UnitOfWork;
 using Domain.Interfaces;
+using Iot.Mqtt.Sensor.Handler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +44,10 @@ namespace IotLogger
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
+
+
+            MqttClient client = new MqttClient();
+            client.StartConnectionAsync();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
