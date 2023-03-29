@@ -1,4 +1,4 @@
-﻿namespace Domain
+﻿namespace Domain.Model
 {
     /// <summary>
     /// Class used in business logic to represent user.

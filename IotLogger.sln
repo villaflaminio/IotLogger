@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{48F0158E-F4FD-4A62-96A7-F0330554E0A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MqttSensorHandler", "MqttSensorHandler\MqttSensorHandler.csproj", "{6E220F84-01B6-46CC-A462-B5C0F2563E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMqttSender", "DemoMqttSender\DemoMqttSender.csproj", "{EB4A7FB2-1478-4AF2-B2BB-3602C99B2AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{48F0158E-F4FD-4A62-96A7-F0330554E0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48F0158E-F4FD-4A62-96A7-F0330554E0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48F0158E-F4FD-4A62-96A7-F0330554E0A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E220F84-01B6-46CC-A462-B5C0F2563E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E220F84-01B6-46CC-A462-B5C0F2563E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E220F84-01B6-46CC-A462-B5C0F2563E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E220F84-01B6-46CC-A462-B5C0F2563E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB4A7FB2-1478-4AF2-B2BB-3602C99B2AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4A7FB2-1478-4AF2-B2BB-3602C99B2AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4A7FB2-1478-4AF2-B2BB-3602C99B2AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4A7FB2-1478-4AF2-B2BB-3602C99B2AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

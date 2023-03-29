@@ -1,6 +1,7 @@
 ﻿using DataAccessEF.UnitOfWork;
 using Domain;
 using Domain.Interfaces;
+using Domain.Model;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using System;

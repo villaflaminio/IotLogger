@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Interfaces;
+using Domain.Model;
 using log4net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                _logger.Info($@"{ControllerContext.HttpContext.Request.Path}");
+                _logger.Info("GET" + $@"{ControllerContext.HttpContext.Request.Path}");
                 IEnumerable<Sensor> sensori = unitOfWork.Sensor.GetAll();
                 return Ok(sensori);
             }
@@ -53,7 +54,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
+                _logger.Info("GET" + $@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
                 Sensor sensore = unitOfWork.Sensor.GetById(id);
                 return Ok(sensore);
             }
@@ -71,7 +72,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
+                _logger.Info("POST" + $@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
                 Sensor newSensor = new Sensor(value.SensorId);
                 unitOfWork.Sensor.Add(newSensor);
                 unitOfWork.Save();
@@ -93,7 +94,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
+                _logger.Info("PUT" + $@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
 
                 var sensore = await unitOfWork.Sensor.Update(value.Id, value);
                 return Ok(sensore);
@@ -110,7 +111,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(long id)
         {
-            _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
+            _logger.Info("DELETE" + $@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
             Sensor sensor = await unitOfWork.Sensor.Delete(id);
             return Ok(sensor);
         }
