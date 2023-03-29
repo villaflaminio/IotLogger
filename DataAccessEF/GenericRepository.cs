@@ -29,7 +29,7 @@ namespace DataAccessEF
         {
             return context.Set<T>().ToList();
         }
-        public T GetById(int id)
+        public T GetById(long id)
         {
             return context.Set<T>().Find(id);
         }
@@ -37,6 +37,7 @@ namespace DataAccessEF
         {
             context.Set<T>().Remove(entity);
         }
+
         public void RemoveRange(IEnumerable<T> entities)
         {
             context.Set<T>().RemoveRange(entities);

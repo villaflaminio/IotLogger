@@ -8,6 +8,8 @@ namespace Domain.Interfaces
 {
     public interface ISensorRepository : IGenericRepository<Sensor>
     {
+        Task<Sensor> Update(long id, SensorDto model);
+        Task<Sensor> Delete(long id);
 
     }
 }

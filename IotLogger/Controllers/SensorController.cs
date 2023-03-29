@@ -27,13 +27,6 @@ namespace WebAPI.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
-        public IEnumerable<Sensor> GetAllPersons()
-        {
-            _logger.Info("GetAllPersons");
-            return unitOfWork.Sensor.GetAll();
-        }
-
 
         [HttpGet]
         [ProducesResponseType(typeof(IQueryable<Sensor>), StatusCodes.Status200OK)]
@@ -47,63 +40,79 @@ namespace WebAPI.Controllers
                 return Ok(sensori);
             }
             catch (Exception ex)
-            {   
+            {
                 _logger.Error(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
 
-        // GET api/<ValuesController>/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(IQueryable<Sensor>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get(long id)
         {
             try
             {
                 _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
-                IEnumerable<Sensor> sensori = unitOfWork.Sensor.GetById(id);
-                return Ok(sensori);
+                Sensor sensore = unitOfWork.Sensor.GetById(id);
+                return Ok(sensore);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex.Message);
                 return BadRequest(ex.Message);
             }
-            var ruolo = _service.Get(id);
-            return Ok(_mapper.return_result<RuoloAPIModel, Ruolo>(ruolo));
         }
 
-        //// POST api/<ValuesController>
-        //[HttpPost]
-        //[ProducesResponseType(typeof(RuoloAPIModel), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> Post([FromBody] CreateRuoloAPIModel value)
-        //{
-        //    loggerx.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
-        //    var ruolo = await _service.Create(value);
-        //    return Ok(_mapper.return_result<RuoloAPIModel, Ruolo>(ruolo));
+        [HttpPost]
+        [ProducesResponseType(typeof(Sensor), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Post([FromBody] SensorDto value)
+        {
+            try
+            {
+                _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
+                Sensor newSensor = new Sensor(value.SensorId);
+                unitOfWork.Sensor.Add(newSensor);
+                unitOfWork.Save();
 
-        //}
+                return Ok(newSensor);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                return BadRequest(ex.Message);
+            }
 
-        //// PUT api/<ValuesController>/5
-        //[HttpPut]
-        //[ProducesResponseType(typeof(RuoloAPIModel), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> Put([FromBody] RuoloAPIModel value)
-        //{
-        //    loggerx.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
-        //    var ruolo = await _service.Update(value.Id, value);
-        //    return Ok(_mapper.return_result<RuoloAPIModel, Ruolo>(ruolo));
-        //}
+        }
 
-        //// DELETE api/<ValuesController>/5
-        //[HttpDelete("{id}")]
-        //[ProducesResponseType(typeof(RuoloAPIModel), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> Delete(uint id)
-        //{
-        //    loggerx.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
-        //    var ruolo = await _service.Delete(id);
-        //    return Ok(_mapper.return_result<RuoloAPIModel, Ruolo>(ruolo));
-        //}
+        [HttpPut]
+        [ProducesResponseType(typeof(Sensor), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Put([FromBody] SensorDto value)
+        {
+            try
+            {
+                _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(value)}");
+
+                var sensore = await unitOfWork.Sensor.Update(value.Id, value);
+                return Ok(sensore);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e);
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Sensor), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete(long id)
+        {
+            _logger.Info($@"{ControllerContext.HttpContext.Request.Path} {JsonConvert.SerializeObject(id)}");
+            Sensor sensor = await unitOfWork.Sensor.Delete(id);
+            return Ok(sensor);
+        }
     }
 }

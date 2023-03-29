@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace Domain
+﻿namespace Domain
 {
     /// <summary>
     /// Class used in business logic to represent user.

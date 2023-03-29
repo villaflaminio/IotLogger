@@ -1,7 +1,6 @@
 ﻿using Domain;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Net;

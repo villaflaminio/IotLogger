@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace Domain
+﻿namespace Domain
 {
     /// <summary>
     /// Class used in business logic to represent user.
@@ -11,5 +8,16 @@ namespace Domain
         public long Id { get; set; }
         public string SensorId { get; set; }
         public List<Data> IotData { get; set; }
+
+        public Sensor()
+        {
+            IotData = new List<Data>();
+        }
+
+        public Sensor(string sensorId)
+        {
+            SensorId = sensorId;
+            IotData = new List<Data>();
+        }
     }
 }
